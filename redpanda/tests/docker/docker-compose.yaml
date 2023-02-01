@@ -14,17 +14,43 @@ services:
     - --kafka-addr
     - PLAINTEXT://0.0.0.0:9092
     - --advertise-kafka-addr
-    - PLAINTEXT://redpanda:29092
-    image: docker.vectorized.io/vectorized/redpanda:${REDPANDA_VERSION}
+    - PLAINTEXT://redpanda:9092
+    image: docker.redpanda.com/vectorized/redpanda:${REDPANDA_VERSION}
     container_name: redpanda
     ports:
       - 9092:9092
       - 9644:9644
+      - 8081:8081
     expose:
       - 9092
       - 9644
+      - 8081
     networks:
       - redpandanet
+  console:
+    image: docker.redpanda.com/vectorized/console:latest
+    restart: on-failure
+    entrypoint: /bin/sh
+    command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda:9092"]
+          schemaRegistry:
+            enabled: true
+            urls: ["http://redpanda:8081"]
+        connect:
+          enabled: true
+          clusters:
+            - name: datagen
+              url: http://connect:8085
+    ports:
+      - "8080:8080"
+    networks:
+      - redpandanet
+    depends_on:
+      - redpanda
 
 networks:
   redpandanet: {}

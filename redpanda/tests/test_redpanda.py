@@ -28,7 +28,8 @@ def test_instance_default_check(aggregator, dd_run_check, mock_http_response):
 @pytest.mark.unit
 def test_instance_additional_check(aggregator, dd_run_check, mock_http_response):
     # add additional metric groups for validation
-    additional_metric_groups = ['redpanda.alien', 'redpanda.raft']
+    additional_metric_groups = ['redpanda.controller', 'redpanda.io_queue', 'redpanda.memory', 'redpanda.raft',
+                                'redpanda.scheduler']
 
     instance = deepcopy(MOCK_REDPANDA_INSTANCE)
     instance['metric_groups'] = additional_metric_groups

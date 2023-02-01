@@ -48,7 +48,7 @@ instances:
     ## @param openmetrics_endpoint - string - required
     ## The URL exposing metrics in the OpenMetrics format.
     #
-  - openmetrics_endpoint: http://localhost:9644/metrics
+  - openmetrics_endpoint: http://localhost:9644/public_metrics
 
     ## @param use_openmetrics - boolean - optional - default: true
     ## Use the latest OpenMetrics implementation for more features and better performance.
@@ -60,14 +60,11 @@ instances:
     ## List of additional Redpanda metric groups to collect in addition to the default metrics
     #
     # metric_groups:
-    #   - redpanda.alien
-    #   - redpanda.internal_rpc
+    #   - redpanda.controller
     #   - redpanda.io_queue
     #   - redpanda.memory
     #   - redpanda.raft
-    #   - redpanda.rpc_client
     #   - redpanda.scheduler
-    #   - redpanda.stall
 
     ## @param raw_metric_prefix - string - optional
     ## A prefix that is removed from all exposed metric names, if present.
