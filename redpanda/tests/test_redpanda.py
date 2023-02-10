@@ -28,8 +28,13 @@ def test_instance_default_check(aggregator, dd_run_check, mock_http_response):
 @pytest.mark.unit
 def test_instance_additional_check(aggregator, dd_run_check, mock_http_response):
     # add additional metric groups for validation
-    additional_metric_groups = ['redpanda.controller', 'redpanda.io_queue', 'redpanda.memory', 'redpanda.raft',
-                                'redpanda.scheduler']
+    additional_metric_groups = [
+        'redpanda.controller',
+        'redpanda.io_queue',
+        'redpanda.memory',
+        'redpanda.raft',
+        'redpanda.scheduler',
+    ]
 
     instance = deepcopy(MOCK_REDPANDA_INSTANCE)
     instance['metric_groups'] = additional_metric_groups
@@ -99,7 +104,13 @@ def test_check(aggregator, dd_run_check):
 
     for m in INSTANCE_DEFAULT_METRICS:
         # skipping as its only exposed when consumer group is created
-        if m == "redpanda.kafka.group_offset":
+        if m in [
+            "redpanda.kafka.group_count",
+            "redpanda.cluster.partitions",
+            "redpanda.cluster.replicas",
+            "redpanda.kafka.group_offset",
+            "redpanda.kafka.group_topic_count",
+        ]:
             continue
         aggregator.assert_metric(m)
     aggregator.assert_all_metrics_covered()
