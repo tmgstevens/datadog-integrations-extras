@@ -37,3 +37,4 @@ redpanda.schema_registry_latency_seconds,histogram,,second,,Internal latency of 
 redpanda.storage.disk_free_bytes,counter,,byte,,Disk storage bytes free.,-1,redpanda,storage disk free bytes ,
 redpanda.storage.disk_free_space_alert,gauge,,,,"Status of low storage space alert. 0-OK, 1-Low Space 2-Degraded",-1,redpanda,storage disk free space alert ,
 redpanda.storage.disk_total_bytes,counter,,byte,,"Total size of attached storage, in bytes.",-1,redpanda,storage disk total bytes ,
+redpanda.kafka.request_byte,counter,,byte,,Total number of bytes produced per topic,-1,redpanda,kafka request bytes,

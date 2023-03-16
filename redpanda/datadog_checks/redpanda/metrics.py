@@ -28,6 +28,7 @@ VECTORIZED_IO_QUEUE = {
 
 VECTORIZED_KAFKA = {
     'redpanda_kafka_request_latency_seconds': 'kafka.request_latency_seconds',
+    'redpanda_kafka_request_bytes_total': 'kafka.request_bytes',
     'redpanda_kafka_under_replicated_replicas': 'kafka.under_replicated_replicas',
     'redpanda_kafka_consumer_group_committed_offset': 'kafka.group_offset',
     'redpanda_kafka_consumer_group_consumers': 'kafka.group_count',
