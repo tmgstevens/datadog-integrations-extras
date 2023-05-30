@@ -60,11 +60,12 @@ instances:
     ## List of additional Redpanda metric groups to collect in addition to the default metrics
     #
     # metric_groups:
+    #   - redpanda.cloud
     #   - redpanda.controller
-    #   - redpanda.io_queue
-    #   - redpanda.memory
-    #   - redpanda.raft
+    #   - redpanda.node_status
+    #   - redpanda.pandaproxy
     #   - redpanda.scheduler
+    #   - redpanda.schemaregistry
 
     ## @param raw_metric_prefix - string - optional
     ## A prefix that is removed from all exposed metric names, if present.
@@ -206,7 +207,7 @@ instances:
     ## when sending histogram buckets as Datadog distribution metrics. This implicitly enables the
     ## `histogram_buckets_as_distributions` option.
     #
-    # collect_counters_with_distributions: false
+    collect_counters_with_distributions: true
 
     ## @param use_process_start_time - boolean - optional - default: false
     ## Whether to enable a heuristic for reporting counter values on the first scrape. When true,

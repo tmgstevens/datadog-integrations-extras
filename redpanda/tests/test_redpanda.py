@@ -29,11 +29,12 @@ def test_instance_default_check(aggregator, dd_run_check, mock_http_response):
 def test_instance_additional_check(aggregator, dd_run_check, mock_http_response):
     # add additional metric groups for validation
     additional_metric_groups = [
+        'redpanda.cloud',
         'redpanda.controller',
-        'redpanda.io_queue',
-        'redpanda.memory',
-        'redpanda.raft',
+        'redpanda.node_status',
+        'redpanda.pandaproxy',
         'redpanda.scheduler',
+        'redpanda.schemaregistry',
     ]
 
     instance = deepcopy(MOCK_REDPANDA_INSTANCE)
@@ -106,8 +107,9 @@ def test_check(aggregator, dd_run_check):
         # skipping as its only exposed when consumer group is created
         if m in [
             "redpanda.kafka.group_count",
-            "redpanda.cluster.partitions",
             "redpanda.cluster.replicas",
+            "redpanda.kafka.partitions",
+            "redpanda.kafka.replicas",
             "redpanda.kafka.group_offset",
             "redpanda.kafka.group_topic_count",
         ]:
